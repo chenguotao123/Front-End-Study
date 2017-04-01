@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+.nav {
+    width: 500px;
+    height: 80px;
+    background: pink;
+    margin: 50px auto;
+}
+
+.nav li {
+    float: left;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+}
+
+.nav li a {
+    padding: 0 10px;
+}
+
+.nav li:hover {
+    background: lawngreen;
+}
+
+.nav li:hover a {
+    color: red;
+}
+
+.fl {
+    float: left;
+}
+
+.header {
+    width: 1000px;
+    height: 80px;
+    background: red;
+}
+
+.container {
+    /*overflow: hidden;*/
+}
+
+.leftbox {
+    width: 100px;
+    height: 400px;
+    background: blue;
+}
+
+.main {
+    width: 800px;
+    height: 500px;
+    background: hsla(hue, saturation, lightness, alpha);
+    
+}
+
+
+/*.main_top {
+    height: 300px;
+    background: gold;
+}
+
+.main_bottom {
+    height: 300px;
+    background: gray;
+}*/
+
+.rightbox {
+    width: 100px;
+    height: 300px;
+    background: purple;
+}
+
+.footer {
+    width: 1000px;
+    height: 50px;
+    background: red;
+}
+
+
+/*清理浮动1*/
+ /*overflow: hidden;*/
+
+/*.clearfix {
+    clear: both;
+}*/
+
+
+/*清理2*/
+
+
+/*清理2*/
+
+.clearfix:before, 
+.clearfix:after {
+    content: " ";
+    /*height: 0;
+    line-height: 0;
+    display: block;
+    visibility: hidden;
+    clear: both;*/
+
+    clear: both;
+    display: table;
+}
+
+.clearfix {
+    *zoom: 1;
+}

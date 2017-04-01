@@ -1,0 +1,28 @@
+/*第一种 新浪*/
+.clearfix 
+:after{
+content: "";
+height: 0;
+display: block;
+visibility: hidden;
+clear: both;
+}
+.clearfix{
+  zoom: 1;
+  /*兼容ie6*/
+}
+
+
+/*第二种 小米和淘宝*/
+.clearfix:before,
+.clearfix:after{
+clear: both;
+display: table;
+/*表格模式*/
+}
+.clearfix{
+  zoom: 1;
+  /*兼容ie6*/
+}
+/*以上常用 下面不推荐使用*/
+/*第四种 额外加个div clear both*/

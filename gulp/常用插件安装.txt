@@ -1,0 +1,11 @@
+npm install gulp-less 
+npm install gulp-autoprefixer
+npm install gulp-cssmin
+npm install gulp-imagemin
+npm install gulp-uglify
+npm install gulp-concat
+npm install gulp-htmlmin
+npm install gulp-rev
+npm install gulp-rev-collector 
+npm install gulp-useref
+npm install gulp-if

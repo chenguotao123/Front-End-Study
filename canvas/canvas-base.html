@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>canvas 基本语法</title>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        var canvas = document.getElementById("canvas")
+        canvas.width = 500;
+        canvas.height = 400;
+        canvas.style.border = "1px solid red";
+        var ctx = canvas.getContext("2d")
+        var w = canvas.width,
+            h = canvas.height;
+        //1，绘制矩形
+        // ctx.strokeStyle="red"
+        // ctx.strokeRect(150, 150, 50, 50);
+
+        // ctx.fillStyle="gold"
+        // ctx.fillRect(200, 200, 50, 50);
+
+        //2，绘制圆
+        //CanvasRenderingContext2D.arc( x, y, radius. startAngle. endAngle, anticlockwise )
+        //数 anticlockwise 表示是否采用默认的正向角度, 如果传入 true 表示逆指针为正. 该参数可选.
+
+        // ctx.beginPath();
+        // ctx.arc(w / 2, h / 2, 180, 0, 2 * Math.PI);
+        // ctx.stroke();
+
+
+        //3，绘制扇形
+        // 将弧度转换为度数
+        function toAngle(radian) {
+            return 180 * radian / Math.PI;
+        }
+        /**
+         * 将度数转换为弧度
+         * @param {*} angle 
+         */
+        function toRadian(angle) {
+            return Math.PI * angle / 180;
+        }
+        // var start = -30,
+        //     end = -150;
+
+        // ctx.moveTo(w / 2, h / 2);
+        // ctx.arc(w / 2, h / 2, 120, toRadian(start), toRadian(end), true);
+        // ctx.closePath();
+        // ctx.stroke();
+        // ctx.fill();
+
+        //4，绘制直角坐标系
+        var padding = 20;
+        var arrowHeight = 16,
+            arrowWidth = 16;
+        function drawAxises(padding, arrowWidth, arrowHeight) {
+            ctx.lineWidth = 2;
+            // 绘制x y 轴
+            ctx.beginPath();
+            ctx.moveTo(padding, padding);
+            ctx.lineTo(padding, h - padding);
+            ctx.lineTo(w - padding, h - padding);
+            ctx.stroke();
+            // 绘制 x 轴箭头
+
+            ctx.beginPath();
+            ctx.moveTo(w - padding, h - padding);
+            ctx.lineTo(w - padding - arrowHeight,
+                h - padding - arrowWidth / 2);
+            ctx.lineTo(w - padding - arrowHeight / 2,
+                h - padding);
+            ctx.lineTo(w - padding - arrowHeight,
+                h - padding + arrowWidth / 2);
+            ctx.closePath();
+
+            // // 绘制 y 轴箭头
+            ctx.moveTo(padding, padding);
+            ctx.lineTo(padding - arrowWidth / 2, padding + arrowHeight);
+            ctx.lineTo(padding, padding + arrowHeight / 2);
+            ctx.lineTo(padding + arrowWidth / 2, padding + arrowHeight);
+            ctx.closePath();
+            ctx.fill();
+        }
+        // drawAxises(padding, arrowHeight, arrowWidth);
+
+        //5,绘制折线图
+        var points = [[50, 100], [10, 800], [150, 300], [400, 200], [800, 1000]];
+        // 绘制点
+        function drawPoints(points, pointSize) {
+            var x, y; // 用来存储点坐标
+            var x0 = padding,
+                y0 = h - padding;
+
+            // 按照x坐标给points排序（升）
+            points.sort(function (a, b) {
+                return a[0] - b[0];
+            });
+
+            // 获取坐标轴的有效长度
+            var xLength = w - 2 * padding - arrowHeight,
+                yLength = h - 2 * padding - arrowHeight;
+
+            // 获取到所有点中x，y坐标最大值
+            var xMax = Math.max.apply(null, points.map(function (v) {
+                return v[0];
+            })),
+                yMax = Math.max.apply(null, points.map(function (v) {
+                    return v[1];
+                }));
+            // 存储变换后的所有点
+            var renderPoints = [];
+            points.forEach(function (point) {
+                x = point[0];
+                y = point[1];
+                // 点坐标缩放
+                x = xLength * x / xMax;
+                y = yLength * y / yMax;
+                // 坐标系变换
+                x = x0 + x;
+                y = y0 - y;
+                // 将变换后的坐标点，存储起来
+                renderPoints.push([x, y]);
+                ctx.beginPath();
+                ctx.arc(x, y, pointSize, 0, 2 * Math.PI);
+                ctx.fill();
+            });
+
+            return renderPoints;
+        }
+        // 绘制折线
+        function drawLines(points) {
+            var renderPoints = drawPoints(points, 4);
+            ctx.beginPath();
+            ctx.moveTo(renderPoints[0][0], renderPoints[0][1]);
+            renderPoints.forEach(function (point, i) {
+                if (i > 0) {
+                    ctx.lineTo(point[0], point[1]);
+                }
+            });
+            ctx.stroke();
+        }
+         drawLines(points)
+    </script>
+</body>
+
+</html>

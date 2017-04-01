@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>左边自适应</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        /* 设置页面中所有元素的内外补丁为0，便于更便捷的页面布局 */
+        
+        .header,
+        .footer {
+            height: 30px;
+            background-color: #E8E8E8;
+        }
+        /* 设置头部信息以及底部信息的高度为30px，并添加浅灰色背景色 */
+        
+        .container {
+            margin: 0 auto;
+            height: 400px;
+        }
+        /* 设置页面内容区域设置上下外补丁为10px */
+        
+        .mainBox {
+            overflow: hidden;
+            color: #FF0000;
+            background-color: #333333;
+        }
+        /* 设置主要内容区域的宽度为70%，背景色以及文本颜色，并居左显示 */
+        
+        .sideBox {
+            float: right;
+             width: 200px;
+            color: #FFFFFF;
+            background-color: #999;
+        }
+        /* 设置侧边栏的宽度为200px，背景色以及文本颜色，并居右显示 */
+    </style>
+
+    <body>
+        <div class="header">头部信息</div>
+        <div class="container">
+            <div class="sideBox">侧边栏
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+            </div>
+            <div class="mainBox">
+                <p>主要内容区域 已经不再只是一行文字了放很多很多东西到这个区域中来
+                </p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+                <p>不断的重复啊重复着……</p>
+            </div>
+        </div>
+        <div class="footer">底部信息</div>
+    </body>
+
+</html>

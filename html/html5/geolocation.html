@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>index</title>
+	<meta charset="UTF-8">
+</head>
+
+<body>
+	<script>
+		//检测是否支持定位
+		if(window.navigator.geolocation){
+			window.navigator.geolocation.getCurrentPosition(function(position){
+				console.log(position)
+			},function(error){
+				console.log(error)
+			})
+		}
+	// 	当成功获取地理信息后，会调用succssCallback，并返回一个包含位置信息的对象position.Coords(坐标)
+    //     1. coords.latitude：估计纬度
+    // 　　2. coords.longitude：估计经度
+    // 　　3. coords.altitude：估计高度
+    // 　　4. coords.accuracy：所提供的以米为单位的经度和纬度估计的精确度
+    // 　　5. coords.altitudeAccuracy：所提供的以米为单位的高度估计的精确度
+    // 　　6. coords.heading： 宿主设备当前移动的角度方向，相对于正北方向顺时针计算
+    // 　　7. coords.speed：以米每秒为单位的设备的当前对地速度
+    //     当获取地理信息失败后，会调用errorCallback，并返回错误信息error
+    //     可选参数 options 对象可以调整位置信息数据收集方式
+	</script>
+</body>
+
+</html>

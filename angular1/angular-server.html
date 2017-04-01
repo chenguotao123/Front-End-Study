@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>angular中的服务</title>
+    <script src="lib/angular.min.js"></script>
+</head>
+
+<body ng-app="app" ng-controller="appController">
+    <div> {{now}}</div>
+    <div>{{currentTime}}</div>
+    <div id="messageId" style="width: 100px;height: 50px">
+        {{author}} {{version}}
+    </div>
+    <div>{{data}}</div>
+    <input type="text" ng-model="keywords" placeholder="请输入搜索的关键字" ng-keyup="search()">
+    <ul>
+        <li ng-repeat="item in list">{{item}}</li>
+    </ul>
+    <script>
+        var App = angular.module("app", []);
+
+        //service             
+        App.service("DateUtils", ["$filter", function ($filter) {
+            this.getDate = function (data, formater) {
+                var date = $filter("date")
+                return date(data, formater)
+            }
+        }])
+
+        //factory 是工厂，出来的是一个对象
+        App.factory("jq", [function () {
+            return {
+                css: function (selector, color) {
+                    document.querySelector(selector).style.background = color
+                }
+            }
+        }])
+        /*定义常量*/
+        //常量
+        App.value("author", "小旋风");
+        App.value("version", "1.0");
+
+        //配置服务
+
+        //每个服务都对应有一个provider 提供者
+        //    叫做服务提供者
+        //    $log 对应就有 $logProvider
+        App.config(["$logProvider", function ($logProvider) {
+            $logProvider.debugEnabled(false)
+        }])
+        App.config(["$filterProvider", function ($filterProvider) {
+            $filterProvider.register("reverse", function () {
+                return function (arg) {
+                    return arg.split("").reverse().join("")
+                }
+            })
+        }])
+
+        // $filter 这个提供的一个服务，获取到一个过滤器，
+        //直接在model 对数据进行过滤处理
+        App.controller("appController", ["$filter", "$scope", "DateUtils", "jq", "author", "version", "$log", function ($filter, $scope, DateUtils, jq, author, version, $log) {
+            var date = $filter("date");
+            $scope.now = date(new Date(), "yyyy-MM-dd HH:mm:ss")
+
+            //搜索
+            var list = ["zhangsan", "lisan", "laowang"];
+            $scope.list = list;
+            $scope.search = function () {
+                var keywords = $scope.keywords;
+                if (keywords.length == 0) {
+                    $scope.list = list;
+                    return;
+                }
+
+                /*根据名字得到方法*/
+                var filter = $filter("filter");
+                $scope.list = filter($scope.list, keywords);
+            }
+
+            $scope.currentTime = DateUtils.getDate(new Date(), "yyyy-MM-dd HH小时:mm分:ss秒")
+
+            jq.css("#messageId", "gold")
+
+            $scope.author = author;
+            $scope.version = version;
+
+            $log.log("打印级别");
+            $log.debug("调试级别");
+
+            var filter = $filter("reverse")
+            $scope.data = filter("wokao sb")
+        }])
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>浏览器缓存机制</title>
+</head>
+
+<body>
+    <!--h5以前
+        cookie 容量小4k左右
+        应用场景：存储用户名 密码 验证码
+    h5以后
+        会话存储sessionStorage  会话：浏览器打开到关闭为止 规定为一个session
+            特点：临时存储 浏览器打开到关闭为止，存量较小5M左右
+            应用场景：购物车内容，临时的隐私数据
+            
+        本地存储localStorage 存在内存和硬盘中
+            特点：永久存储，手动删除 存量在20M左右
+            应用场景：音乐列表、加密的数据、位置信息-->
+    <script>
+        // sessionStorage  localStorage 方法一样
+        window.sessionStorage.setItem("test", "hello world")
+        var keyValue = window.sessionStorage.getItem("test")
+        var key = window.sessionStorage.key(0)
+        console.log(keyValue)
+        console.log(key)
+        // window.sessionStorage.removeItem("test")
+        // window.sessionStorage.clear()
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>angular1的基本语法 (v1.6.3) </title>
+</head>
+
+<body ng-app="app" ng-controller="appController">
+    <ul>
+        <!--数组遍历-->
+        <li ng-repeat="item in list">{{item}}</li>
+        <!--自定义指令-->
+        <li>
+            <my-directive></my-directive>
+        </li>
+        <!--双向数据绑定-->
+        <li>
+            <input type="text" ng-model="msg">{{msg}}
+            <!--解决闪烁的问题-->
+            <label ng-cloak>{{msg}}</label>
+            <label ng-bind="msg">ng-bind</label>
+            <p ng-bind-template="{{msg}}{{text}}"></p>
+        </li>
+        <!--条件判断-->
+        <li ng-repeat="item in list" ng-switch="item">
+            {{item}}
+            <a href="#" ng-switch-when="css"> 条件判断 ：这是 {{item}} </a>
+        </li>
+        <!--事件处理-->
+        <li> <button ng-click="add('我刚刚点击了一下')">点击</button> </li>
+        <li> {{time|date:'yyyy年MM月dd HH:mm:ss'}}</li>
+        <li>格式化这个金钱 currency(货币) {{price|currency:'￥':'10'}}
+        </li>
+        <li>
+            <!--这个是将一个对象格式化成字符串
+                  其实这个过滤没有什么用，官网给解释，可以用来做测试
+                    -->
+            {{obj|json}}</li>
+        <li>
+            <!--
+                        第一个参数：截取多少位
+                        第二参数：从第几个索引开始.
+                    -->
+            {{str|limitTo:'4':'3'}}</li>
+        <li>
+            {{str1|lowercase}}
+        </li>
+        <li>
+            <!--
+                我可以同时调用多个过滤器
+                        | 调用过滤器  ： 后面跟参数,
+                    -->
+            {{str1|uppercase|lowercase}}
+        </li>
+
+        <li>
+            <!--跟的小数位的位数，保留多少位-->
+            {{num|number:'4'}}
+        </li>
+
+        <li>
+            <!--
+                第二个参数用来指定排序的方式，升序，还是降序.
+                     -->
+            {{list|orderBy:'':false}}
+        </li>
+
+        <li>
+            <!--
+                1：我需要根据那个字段进行排序
+                2: 需要排序的方式
+                        -->
+            {{datalist|orderBy:'age':false}}
+        </li>
+
+
+        <li>
+            <!--
+                过滤器，根据需求去筛选数据，找到我想要的数据.
+                、第一个参数条件
+                     -->
+            {{persons|filter:'dan'}}
+        </li>
+
+
+        <li>
+            <!--filter 过滤
+                    filter 后面跟的参数是一个对象，{}
+                    解析的时候为了避免冲突，需要添加一个空格.
+                    -->
+            {{users|filter:{age:18} }}
+        </li>
+        <!--自定义过滤器：反转字符串-->
+        <li>{{stringReverse|reverse}}</li>
+    </ul>
+    <!--这类似于.net 的部分页-->
+    <!--<div ng-include="'footer.html'"></div>-->
+    <script src="node_modules/angular/angular.js"></script>
+    <script>
+        var App = angular.module("app", [])
+        App.controller("appController", ["$scope", function ($scope) {
+            $scope.list = ["js", "html", "css"],
+                $scope.msg = "这是双向数据绑定的内容"
+            $scope.text = "这是双向数据绑定的内容text"
+            // ng-bind
+            // ng-bind vs {{}}
+            // 假设我使用{{}}，有可能页面上面会有闪烁的效果
+            // 我怎么去解决这个效果. ng-cloak 解决这个闪烁的效果
+            // 我们使用ng-bind 也可以解决闪烁的效果
+
+            //事件处理
+            $scope.add = function (name) {
+                alert("这是传入的参数值：" + name)
+            }
+            //作用域 类似js中函数变量的作用域
+
+            //过滤器(内置)
+            /*格式化日期，你怎么处理
+                * var date=new Date();
+                * */
+            $scope.time = new Date();
+            $scope.price = 11.223344;
+
+            /*json 过滤器
+            * 将一个对象格式化成一个json 字符串
+            * */
+            $scope.obj = { "username": "yanglili" };
+
+            $scope.str = "what are you 弄撒嘞";
+
+            /*转换成小写，转换成大写*/
+            $scope.str1 = "It's  very Good";
+
+            $scope.num = "11.22334455667788";
+
+            $scope.list = ["333", "111", "222"]
+
+            $scope.datalist = [
+                { "username": "杨丽", "age": 22 },
+                { "username": "王君", "age": 20 },
+                { "username": "李华涛", "age": 33 }
+            ];
+            $scope.persons = ["lidan", "wandan", "zhudan", "chegndan"];
+
+            $scope.users = [
+                { "username": "赵刚刚", "age": 23 },
+                { "username": "周天宇", "age": 13 },
+                { "username": "贾一梦", "age": 18 }
+            ];
+
+
+            $scope.stringReverse = "I love you"
+
+        }])
+
+        //自定义过滤器
+        App.filter("reverse", function () {
+
+            return function (str) {
+                //反转字符串.
+                return str.split("").reverse().join("");
+            };
+        })
+
+
+        //自定义指令
+        //注意camel 命名 中间加横杠
+        App.directive("myDirective", function () {
+            return {
+                restrict: "E", //用来指定指令的类型
+                //    4种类型 ECMA  Element Attribute Class
+                // M 注释 directive:tag      
+                replace: true,
+                template: "<h1>这是指令</h1>"
+                // templateUr:"" 载入一个页面
+
+            }
+        })
+    </script>
+</body>
+
+</html>

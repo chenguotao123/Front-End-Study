@@ -1,0 +1,128 @@
+<!--<!DOCTYPE html>-->
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>html5</title>
+	<!--h5兼容处理：-->
+	<!--[if lt IE9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		
+		form {
+			max-width: 640px;
+			width: 100%;
+			margin: 32px auto 0;
+			font-size: 32px;
+		}
+		
+		;
+		label {
+			display: block;
+			margin: 32px;
+		}
+		
+		input {
+			display: block;
+			width: 100%;
+			height: 32px;
+			margin: 10px;
+		}
+		
+		progress {
+			width: 100%;
+		}
+		
+		meter {
+			width: 100%;
+		}
+		
+		input[type="submit"] {
+			background: limegreen;
+		}
+	</style>
+</head>
+
+<body>
+	<div style="border-radius: 10px;border: 5px;width: 20px;height: 20px;background: red;"></div>
+	<form action="">
+		<fieldset>
+			<legend>h5表单常用新特性</legend>
+			<label for="search">
+					search<input type="search">
+				</label>
+			<label for="文本">
+					文本<input id="txt" type="text" placeholder="文本" autofocus autocomplete="off" required pattern="[A-z]{3}">
+				</label>
+			<label for="url">
+					url<input type="url">
+				</label>
+			<label for="number">
+					number<input type="number" min="1" max="10" step="2" value="9">
+				</label>
+			<label for="range">
+					range<input type="range" name="points" min="1" max="10" />
+				</label>
+			<label for="邮箱">
+					邮箱<input type="email" placeholder="邮箱" >
+				</label>
+			<label for="颜色">
+					color<input type="color" value="#ffffff">
+				</label>
+			<label for="时间">
+					time<input type="time" value="12:03">
+				</label>
+			<label for="date">
+					date<input type="date" value="2017-01-03" >
+				</label>
+			<label for="file">
+					file<input type="file" placeholder="文件" multiple>
+				</label>
+			<label for="list">
+					文本list <input type="search" list="list">
+					<datalist id="list">
+						<option  value="c#"></option>
+						<option  value="php"></option>
+						<option  value="js"></option>
+						<option  value="java"></option>
+						<option  value="node"></option>
+					</datalist>
+				</label>
+			<label for="度量器">
+					度量器 <meter value="9" min="0" max="10" low="6" high="8">分数</meter>
+				</label>
+			<label for="">
+				 <progress min="0" max="100" value="10"></progress>
+			</label>
+			<label for="提交">
+					<input type="submit" value="提交">
+				</label>
+		</fieldset>
+	</form>
+	<script>
+		//表单事件及方法
+		// oninput	 //输入的时候触发
+		// oninvalid	//验证不通过触发
+		// setCustomValidity //改变默认提示消息
+		var input = document.getElementById("txt")
+		input.setCustomValidity("文本框不能为空")
+		document.querySelector("a").dataset.cont
+
+	// 	FileReder：
+    // 读取一些上传的文件
+    // 实例化一个reader对象
+    // var reader=new FileReder()
+    // reader.readerAsDataURL(input.files[0])
+    // reader.onload=function(){
+    //     reader.result 图片的base64位编码
+    //     直接给img 的src 赋值可以显示图片
+    // }
+	</script>
+</body>
+
+</html>

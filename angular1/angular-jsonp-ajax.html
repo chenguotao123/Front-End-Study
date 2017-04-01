@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>angular的jsonp请求</title>
+    <style>
+        .main {
+            width: 700px;
+            margin: 100px auto;
+        }
+        
+        input[type="text"] {
+            width: 400px;
+            height: 50px;
+        }
+        
+        button {
+            width: 100px;
+            height: 45px;
+            background: #ccc;
+        }
+        
+        .message {
+            width: 400px;
+        }
+        
+        .message li {
+            height: 30px;
+        }
+        
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body ng-app="app" ng-controller="appController">
+    <div class="main">
+        <input type="text" ng-model="keywords" placeholder="调用360搜索接口实现跨域">
+        <button ng-click="search()">搜一下</button>
+    </div>
+    <ul class="message" ng-class="{'hide':flag}">
+        <li ng-repeat="item in list">{{item.word}}</li>
+    </ul>
+    <!--<script src="node_modules/angular/angular.js"></script>-->
+    <script src="lib/angular.min.js"></script>
+    <script>
+        var App = angular.module("app", []);
+        //行内注入
+        App.controller("appController", ["$scope", "$http", function ($scope, $http) {
+            $scope.flag = true;
+            $scope.search = function () {
+                $scope.flag = false;
+                if ($scope.keywords && $scope.keywords.length > 0) {
+                    // 发送跨域请求 v1.5X 
+                    $http({
+                        url: "https://sug.so.360.cn/suggest?encodein=utf-8&encodeout=utf-8&format=json&fields=word,obdata&word=" + $scope.keywords,
+                        method: "jsonp",
+                        params: {
+                            //固定写法 占位符
+                            callback: "JSON_CALLBACK"
+                        }
+
+                    }).success(function (data) {
+                        $scope.list = data.result
+                        // console.log($scope.list)
+                    })
+
+                //    var url= $sce.trustAsResourceUrl('https://sug.so.360.cn/suggest?encodein=utf-8&encodeout=utf-8&format=json&fields=word,obdata&word=' + $scope.keywords)
+                //     $http.jsonp(url, {jsonpCallbackParam: 'callback'})
+                } else {
+                    $scope.flag = true;
+                }
+            }
+        }])
+
+        // v1.5 中$http 的 success 和 error 方法已废弃。使用 then 方法替代。
+
+        // 简单的 GET 请求，可以改为 POST
+        // $http({
+        //     method: 'GET',
+        //     url: '/someUrl'
+        // }).then(function successCallback(response) {
+        //         // 请求成功执行代码
+        //     }, function errorCallback(response) {
+        //         // 请求失败执行代码
+        // });
+
+
+        //ajax 简写
+        // $http.get('/someUrl', config).then(successCallback, errorCallback);
+        // $http.post('/someUrl', data, config).then(successCallback, errorCallback);
+    </script>
+</body>
+
+</html>

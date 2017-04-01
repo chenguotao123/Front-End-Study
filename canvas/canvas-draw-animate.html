@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动画效果绘制饼图</title>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="canvas-animate.js"></script>
+    <script>
+        // 将弧度转换为度数
+        function toAngle(radian) {
+            return 180 * radian / Math.PI;
+        }
+        /**
+         * 将度数转换为弧度
+         * @param {*} angle 
+         */
+        function toRadian(angle) {
+            return Math.PI * angle / 180;
+        }
+        var canvas = document.getElementById("canvas")
+        canvas.width = 500;
+        canvas.height = 400;
+        canvas.style.border = "1px solid red";
+        var ctx = canvas.getContext("2d")
+        var w = canvas.width,
+            h = canvas.height;
+        var data = [{
+            title: 'QQ',
+            value: 500
+        }, {
+            title: 'WeChat',
+            value: 550
+        }, {
+            title: 'MoMo',
+            value: 200
+        }, {
+            title: 'TanTan',
+            value: 300
+        }, {
+            title: 'FeiQiu',
+            value: 50
+        }];
+        // 1: 确定扇形的填充颜色
+        var colors = 'lightsalmon,lightseagreen,lightskyblue,lightslategray,lightsteelblue,lightyellow'.split(',');
+        // 2: 样本总数
+        var sum = 0;
+        data.forEach(function (v) {
+            sum += v.value;
+        });
+
+        // 3: 求每个数据所占用的总角度（弧度）
+        data.forEach(function (v) {
+            v.angle = v.value * 2 * Math.PI / sum;
+        });
+
+        // 4: 绘制扇形
+        var start = -Math.PI / 2, // 绘制扇形的起始角度
+            end; // 存储当前扇形的终止角度
+
+        data.forEach(function (v, i, a) {
+            // 终止角度 为 起始角度 + 当前数据所占用的总角度
+            end = start + v.angle;
+            animate({
+                x: w / 2,
+                y: h / 2,
+                r: 180,
+                step: toRadian(1),
+                start: start,
+                end: end,
+                color: colors[i]
+            }, 'fast');
+
+            // 在绘制下一个扇形时的起始角度 为 当前扇形的终止角度
+            start = end;
+        });
+    </script>
+</body>
+
+</html>

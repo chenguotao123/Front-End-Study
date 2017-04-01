@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>dom</title>
+</head>
+<style>
+	.active {
+		color: red;
+	}
+</style>
+
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li>
+					<a class="active" data-user-name="qm" data-age="24" href="javascript:;">前端</a>
+				</li>
+				<li>
+					<a href="javascript:;">c#</a>
+				</li>
+				<li>
+					<a href="javascript:;">java</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<div>
+		<ul>
+			<li class="first"><a href="#">first</a></li>
+			<li class="sec"><a href="#">sec</a></li>
+		</ul>
+	</div>
+
+	<script>
+		//1,document.querySelector() css 选择器 返回匹配的第一项
+
+		var list = document.querySelector(".first a ")
+		list.style.color = "red"
+
+		//2,document.querySelectorAll() 返回一个匹配的伪数组
+		var arr = document.querySelectorAll("li")
+
+
+		//3,node.classlist.add() remove toggle contains
+		var lis = document.querySelectorAll("li a")
+		lis.forEach(function (element) {
+			element.onclick = function () {
+				var active = document.querySelector(".active")
+				// active.classList.remove('active')
+
+				// this.classList.add("active")
+				// this.classList.toggle("active")
+				// alert(this.classList.contains("active"))
+				// this.classList.remove("active")
+				//4,自定义属性 node.dataset.属性
+				console.log(active.dataset.userName + ">>>>" + active.dataset.age)
+				console.log(active.dataset["userName"])
+				active.dataset.sex = "男"
+
+			}
+		}, this);
+
+	</script>
+</body>
+
+</html>

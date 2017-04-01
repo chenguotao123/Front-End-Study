@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <style>
+        .player {
+            width: 750px;
+            height: 470px;
+            margin: 50px auto;
+            position: relative;
+        }
+        /*控制菜单*/
+        .player .controls {
+            width: 100%;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.4);
+            position: absolute;
+            left: 0;
+            bottom:-25px;
+            box-shadow: 0 0 1px #fff;
+        }
+        
+        .play-btn {
+            font-size: 20px;
+            color: #fff;
+            position: absolute;
+            top: 12px;
+            left: 16px;
+            padding: 5px;
+            cursor: pointer;
+        }
+        
+        .progress {
+            position: absolute;
+            top: 22px;
+            left: 53px;
+            width: 480px;
+            height: 10px;
+            border-radius: 3px;
+            overflow: hidden;
+            box-shadow: 0 0 1px rgba(244, 244, 244, 0.5);
+            cursor: pointer;
+        }
+        
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: #004000;
+        }
+        
+        .time {
+            color: #fff;
+            font-family: "Microsoft YaHei";
+            position: absolute;
+            top: 15px;
+            right: 70px;
+        }
+        
+        .fullscreen {
+            font-size: 20px;
+            color: #fff;
+            position: absolute;
+            right: 19px;
+            top: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="player">
+        <!--视频标签-->
+        <video width=100% height=100% src="lesson-1.MP4" poster="bg.png"></video>
+        <!--控制菜单-->
+        <div class="controls">
+            <div class="progress">
+                <div class="progress-bar"></div>
+            </div>                       
+            <span class="play-btn fa fa-play"></span>
+            <div class="time">
+                <span class="current-time">00:00:00</span>/<span class="total-time">00:00:00</span>
+            </div>
+            <span class="fullscreen fa fa-expand"></span>
+        </div>
+    </div>
+    <script>
+         function secondsFormat(sec) {
+            var h, m, s
+            h = Math.floor(sec / 3600);
+            m = Math.floor(sec / 60);
+            s = Math.floor(sec % 60);
+            h = h > 9 ? h : '0' + h;
+            m = m > 9 ? m : '0' + m;
+            s = s > 9 ? s : '0' + s;
+            return h + ':' + m + ':' + s;
+        }
+        var oVideo=document.querySelector('video');
+        var totalTime=document.querySelector('.total-time');
+        var playBtn=document.querySelector('.play-btn');
+        var current=document.querySelector('.current-time');
+        var progress=document.querySelector('.progress');
+        var progressBar=document.querySelector('.progress-bar');
+        var fullscreen=document.querySelector(".fullscreen");
+       
+        oVideo.oncanplay=function(){
+            totalTime.innerHTML=secondsFormat(oVideo.duration)
+        }       
+       // 当前时间的显示
+        oVideo.ontimeupdate=function(){           
+            current.innerHTML=secondsFormat(oVideo.currentTime)
+             progressBar.style.width=oVideo.currentTime/oVideo.duration*100+'%';
+
+        }
+        playBtn.onclick=function(){           
+            if(oVideo.paused){
+                oVideo.play();
+                this.classList.toggle('fa-pause');
+            }else{
+                oVideo.pause();
+                this.classList.toggle('fa-pause');
+            }
+       }
+       // 跳跃播放
+        progress.onclick=function(e){
+            // console.log(e.offsetX);
+            var progressWidth=parseInt(window.getComputedStyle(progress,null).width);
+            // console.log(progressWidth);
+            oVideo.currentTime=(e.offsetX/progressWidth)*oVideo.duration;
+        }
+        fullscreen.onclick=function(){
+         oVideo.webkitRequestFullscreen();
+    }
+    </script>
+</body>
+
+</html>

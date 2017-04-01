@@ -1,0 +1,7 @@
+@charset "utf-8";
+/*声明变量*/
+a:hover {
+  color: #ccc;
+  border: 1px solid #ccc;
+}
+/*混入 Mixin*/
