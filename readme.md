@@ -770,7 +770,7 @@
     5. attr,prop 区别
         1. attr("box",值) 设置单个属性
             attr({})    设置多个属性
-             取表单值属性时会得到undefined
+            取表单值属性时会得到undefined
         2.  这里可以使用prop 
             自定义属性使用attr,自带属性使用prop
     6. selecor
