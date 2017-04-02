@@ -5,7 +5,8 @@
 1.  requird node 4.x.x 和 npm 3.x.x 以上
 2.  全局安装 Angular-CLI
     npm install -g @angular/cli
-
+    
+    npm uninstall -g @angular/cli
 ### 创建新项目以及应用的骨架
     ng new my-app
     请耐心等待。 创建新项目需要花费很多时间，大多数时候都是在安装那些npm包。

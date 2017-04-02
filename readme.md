@@ -2,7 +2,6 @@
     以下是个人前端学习总结
 ## html css
     1. 基本html标签
-
     2. css语法
         1. css 三大特性：
             层叠性
@@ -57,7 +56,12 @@
                     1）元素设置定位后有个默认的z-index ：auto（除去static）
                     2）z-index 值相同 元素后来居上
                     3）z-index 值越大 当前的元素层级越高
-                    4）父元素的z-index值越大 当前的元素层级越高   
+                    4）父元素的z-index值越大 当前的元素层级越高  
+    3.  重绘与重排 
+
+    4.  BFC
+
+    5.  页面的整个渲染过程
 ## html5 
     1. 什么是h5?
         狭义上:是html4的升级版本，是新一代web应用标准
@@ -825,7 +829,6 @@
             原理：在服务器响应了响应头: Access-Control-Allow-Origin http 协议规定.
             header("Access-Control-Allow-Origin:*");
     9. animation
-
     10. Event（事件绑定，事件代理，事件委托）
         1. 事件绑定： 绑定多个事件
             1)$("#box").bind(""click mouseenter",function(){
@@ -850,9 +853,7 @@
             3. 这就是事件委托或者叫事件代理
                 本质：就是利用事件冒泡的原理，将事件绑定在父容器中，让父容器代为触发
 
-                执行过程：
-
-            4. 新版本jq 统一使用on
+            4. 新版本jq 统一使用on(v1.7后)
                 1. 简单事件添加
                     $("#box").on("click",function(){
                         ...
@@ -871,11 +872,31 @@
                         .....
                     })
                 4. 事件委托好处：
-                    1，提高性能
-                    2，新添加的元素也有事件
-                5. 执行顺序的问题：
-                    一个标签添加了自身的事件，
-                    又添加了委托事件，则委托事件先执行，然后自身事件执行（冒泡）
+                    提高性能
+                        应用场景：
+                            给dom元素循环遍历绑定事件
+                            1. 减少了事件的注册，内存开销减少了
+                            2. 元素的增减不会影响事件的绑定
+                            3. js和DOM节点之间的关联变少了，减少了因循环引用(GC中引用计数法的缺陷)而带来的内存泄漏发生的概率。
+
+                    注意：不是所有的事件都有冒泡（blur、focus、load和unload），所以事件委托不是所有的事件都可以使用。例如mouseover 由于事件对象target 频繁改动会有性能问题
+
+                5. 事件流
+                    场景： 一个标签添加了自身的事件，又添加了委托事件执行顺序？
+                        委托事件先执行，然后自身事件执行（冒泡）
+                    执行的流程：
+                        以这个为例： 
+                         $("#box").on("p","click",function(){
+                            .....
+                        })
+                         $("p").on("click",function(){
+                        ...
+                    })
+
+                    未完待续
+
+
+
                 6. 解绑事件：
                     1）解绑普通事件
                         $("#box").off("click")
@@ -884,16 +905,23 @@
                     3)解绑委托事件
                         $("#box").off("click","**")
                     4）$("#box").off() //接除box盒子所有的事件
+                  
+                7. 事件触发:
+                    1. 简单事件触发：
+                        $(selector).click(); //触发 click事件
+                    2. trigger方法触发事件
+                        $(selector).trigger(“click”);
+                    3. triggerHandler触发 事件响应方法，不触发浏览器行为
+                        $(selector).triggerHandler(“focus”);
 
-                    trigger() 可以传入一个参数，为事件类型
-                    triggerHandler() 触发事件，但是不执行标签的默认效果
-
-                7. jq中阻止事件冒泡：
+                8. jq中阻止事件冒泡：
                     1，阻止事件传播
                         e.stopPropagation();   
                     2，阻止事件触发的默认效果
                         e.preventDefault();
                     3，return false 不仅可以阻止默认效果，还能阻止事件冒泡
+
+                ___更详细的后面会写一篇博客关于事件这块。
     11. 插件开发
 
 
@@ -905,11 +933,15 @@
     2. vue
         Front-End-Study/vue2
     3. bootstrap
-        
+## 正则表达式
+    Front-End-Study/note/reg.md
+## 常用的设计模式
+    待续
 ## tool 
-    1. git 
-
-    2. svn
+    1. git/svn
+        Front-End-Study/note/git.md
+    2. node install
+        Front-End-Study/node/README.md
     3. gulp
         1. 什么是gulp？
             gulpjs是一个前端构建工具，与gruntjs相比，gulpjs无需写一大堆繁杂的配置参数，简单，gulpjs使用的是nodejs中stream来读取和操作数据，速度更快。
@@ -958,7 +990,7 @@
                 执行任务时打印这句话：我是一个appTest的任务
                 Finished 表示结束了这个任务
 
-            详情查看： Front-End-Study/gulp
+            具体自动化构建查看： Front-End-Study/gulp
 
     4. Emmet 语法
         div.className

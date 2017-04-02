@@ -14,3 +14,4 @@ function Hello() {
 	}; 
 }; 
 module.exports = Hello;
+console.log("hello")

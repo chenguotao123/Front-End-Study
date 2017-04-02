@@ -39,8 +39,8 @@ Git的基本工作流程
     * --global: 全局配置，在当前用户下的所有仓库都共享同一个用户的配置信息
     * --system：系统配置，在该电脑下的所有仓库都共享同一个用户的配置信息
     * --local： 本地配置，在该仓库下使用当前配置的用户信息
-  * 通常： git config --global user.name 'guoguo'
-          git config --global user.email 'guoguo@jingjing.com'
+  * 通常： git config --global user.name 'xx'
+          git config --global user.email 'xxx@xxx.com'
   * 查看： git config --get user.name | git config --get user.email
   * 替换：想要修改或者替换掉原先的用户信息，可以重新配置来实现
 
