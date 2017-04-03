@@ -1,0 +1,27 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "inti",
+  "main": "node-first.js",
+  "dependencies": {
+    "mongodb": "^2.2.25",
+    "mysql": "^2.13.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qinmao/Front-End-Study.git"
+  },
+  "keywords": [
+    "npm"
+  ],
+  "author": "xintairuan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qinmao/Front-End-Study/issues"
+  },
+  "homepage": "https://github.com/qinmao/Front-End-Study#readme"
+}

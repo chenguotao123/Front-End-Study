@@ -13,8 +13,10 @@
 // error - 在接收和写入过程中发生错误时触发。
 // finish - 所有数据已被写入到底层系统时触发。
 
-// 从流中读取数据
+
 var fs = require("fs");
+// 从流中读取数据
+
 
 // var data = '';
 // // 创建可读流
@@ -36,7 +38,10 @@ var fs = require("fs");
 //     console.log(err.stack);
 // });
 
-
+//读取文件
+fs.readFile("input.txt","UTF8", function (err, data) {
+  console.log(data)
+})
 
 //写入流
 
@@ -53,7 +58,7 @@ var fs = require("fs");
 //同一个文件会覆盖
 
 //管道流
-// var readerStream=fs.createReadStream("input.txt")
+// var readerStream=fs.createReadStream(`"input.txt")
 // var writeStream=fs.createWriteStream("output.txt")
 // // 管道读写操作
 // // 读取 input.txt 文件内容，并将内容写入到 output.txt 文件中
@@ -64,20 +69,20 @@ var fs = require("fs");
 // 链式是通过连接输出流到另外一个流并创建多个对个流操作链的机制。链式流一般用于管道操作。
 // 接下来我们就是用管道和链式来压缩和解压文件。
 // 创建 compress.js 文件, 代码如下：
-var zlib = require('zlib');
+//var zlib = require('zlib');
 
 // 压缩 input.txt 文件为 input.txt.gz
 
 // fs.createReadStream('input.txt')
 //   .pipe(zlib.createGzip())
 //   .pipe(fs.createWriteStream('input.txt.gz'));
-  
+
 // console.log("文件压缩完成。");
 
 // 解压 input.txt.gz 文件为 input.txt
 
-fs.createReadStream('input.txt.gz')
-  .pipe(zlib.createGunzip())
-  .pipe(fs.createWriteStream('input.txt'));
-  
-console.log("文件解压完成。");
+// fs.createReadStream('input.txt.gz')
+//   .pipe(zlib.createGunzip())
+//   .pipe(fs.createWriteStream('input.txt'));
+
+// console.log("文件解压完成。");

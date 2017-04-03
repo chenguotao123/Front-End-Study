@@ -40,3 +40,8 @@ function sort(arr) {
 // }
 // obj.method(fn);
 
+// function name(x,y){
+//     console.log(x+y)
+// }
+var name=(x,y)=>x+y;
+console.log(name(1,2))

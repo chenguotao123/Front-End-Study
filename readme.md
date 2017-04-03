@@ -82,6 +82,8 @@
             Front-End-Study/html/html5/webStorage.html
         7. video (api 使用)
             Front-End-Study/html/html5/media
+        8. mobile
+            Front-End-Study/note/h5-mobile.md
 ## css3
     1. selector
         属性选择器：
