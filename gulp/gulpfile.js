@@ -80,7 +80,7 @@ gulp.task("jsuglify",function(){
         .pipe(uglify())
         .pipe(gulp.dest("./release/jsmin"))
 });
-//src 就会出性能就不好。合并成一个文件.
+//src多就会出性能就不好。合并成一个文件.
 gulp.task("concat",function(){
     gulp.src("./script/*.js")
         .pipe(concat("all_1.js"))

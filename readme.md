@@ -935,6 +935,8 @@
     2. vue
         Front-End-Study/vue2
     3. bootstrap
+## node
+    Front-End-Study/node/README.md
 ## 正则表达式
     Front-End-Study/note/reg.md
 ## 常用的设计模式
@@ -942,8 +944,9 @@
 ## tool 
     1. git/svn
         Front-End-Study/note/git.md
-    2. node install
-        Front-End-Study/node/README.md
+    2. bower/npm
+        bower 前端的包管理器
+        npm node 的包管理器
     3. gulp
         1. 什么是gulp？
             gulpjs是一个前端构建工具，与gruntjs相比，gulpjs无需写一大堆繁杂的配置参数，简单，gulpjs使用的是nodejs中stream来读取和操作数据，速度更快。
