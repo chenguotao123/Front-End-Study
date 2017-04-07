@@ -7,7 +7,7 @@
             层叠性
             继承性
             优先级
-
+                标签选择器 < 类选择器 <  ID选择器 < 行内样式 <! Important
         2. margin：
             垂直外边距合并
             如何解决垂直外边距塌陷（margin-top  父元素会掉下来）？
@@ -57,11 +57,51 @@
                     2）z-index 值相同 元素后来居上
                     3）z-index 值越大 当前的元素层级越高
                     4）父元素的z-index值越大 当前的元素层级越高  
-    3.  重绘与重排 
+    
+    3. html page 渲染过程
+        浏览器接收服务器响应结果，如果有压缩则首先进行解压处理，紧接着就是页面解析渲染
+        解析渲染该过程主要分为以下步骤：
 
-    4.  BFC
+        1. 解析HTML
 
-    5.  页面的整个渲染过程
+        2. 构建DOM树
+
+        3. DOM树与CSS样式进行附着构造呈现树（渲染树）
+
+        4. 布局
+        
+        5. 绘制
+        详细参考：http://www.cnblogs.com/dojo-lzz/p/3983335.html
+
+    4. repaint&reflow
+        1. reflow:
+            当DOM变化影响了元素的几何属性（宽、高改变等等） 
+            浏览器此时需要重新计算元素几何属性 
+            并且页面中其他元素的几何属性可能会受影响 
+            这样渲染树就发生了改变，也就是重新构造RenderTree渲染树 
+            这个过程叫做重排（reflow）
+
+            具体场景：
+                1）页面初始渲染
+                2）添加/删除可见DOM元素
+                3）改变元素位置
+                4）改变元素尺寸（宽、高、内外边距、边框等）
+                5）改变元素内容（文本或图片等）
+                6）改变窗口尺寸
+        2. repaint：
+            如果DOM变化仅仅影响的了背景色等等非几何属性 
+            此时就发生了重绘（repaint） 
+
+            __不管页面发生了重绘还是重排，它们都会影响性能（重绘还好一些） 
+
+        3. 如何优化?
+            1. 分离读写操作（浏览器渲染队列优化）
+            2. 样式集中改变
+            3. 缓存布局信息
+            4. 元素批量修改
+
+    5. BFC 
+
 ## html5 
     1. 什么是h5?
         狭义上:是html4的升级版本，是新一代web应用标准
@@ -209,7 +249,7 @@
         3d转换：transform-style:
             flat 2d平面呈现
             perserve-3d 3d空间呈现 
-    17.  animation:
+    17. animation:
         1)定义动画：
             格式：@keyframes 动画名称{
                 0%{}
@@ -328,7 +368,7 @@
             2）arr instanceof Array 推荐使用
             3) Object.prototype.toString.call(obj).slice(8, -1).toLowerCase() 可检测任意类型
 
-        7.  节点类型
+        7. 节点类型
             总共有12种，但要记住几个常用的
                 * nodeType = 1，元素节点
                 * nodeType = 2，属性节点
@@ -780,9 +820,7 @@
         2.  这里可以使用prop 
             自定义属性使用attr,自带属性使用prop
     6. selecor
-
     7. dom 操作的方法
-
     8. ajax/jsonp
         1. ajax :
             $.ajax({
@@ -935,6 +973,131 @@
     2. vue
         Front-End-Study/vue2
     3. bootstrap
+        bootstrap常用样式
+        3.1 container类   
+            用于定义一个固定宽度且居中的版心    
+
+            push  pull  offset
+
+
+            hidden 类
+            hidden-xs,hidden-sm,hidden-md,hidden-lg在不同的屏幕下隐藏。
+
+            text-* 类
+                text-center 文本居中
+                text-left 文本左对齐
+                text-right 文本右对齐
+
+            pull-* 类
+            pull-left 左浮动类
+            pull-right 右浮动类
+                
+            center-block 类
+            让一个固定宽度的元素居中。
+
+        3.2 栅格系统
+            - Bootstrap中定义了一套响应式的网格系统，
+            - 其使用方式就是将一个容器划分成12列，
+            - 然后通过col-xx-xx的类名控制每一列的占比
+
+        3.3 row类
+
+            - 因为每一个列默认有一个15px的左右外边距
+            - row类的一个作用就是通过左右-15px屏蔽掉这个边距
+
+            ```html
+            <div class="container">
+            <div class="row"></div>
+            </div>
+            ```
+
+        3.4 col-*\*-\*类
+
+            - col-xs-[列数]：在超小屏幕下展示几份
+            - col-sm-[列数]：在小屏幕下展示几份
+            - col-md-[列数]：在中等屏幕下展示几份
+            - col-lg-[列数]：在大屏幕下展示几份
+            - __xs__ : 超小屏幕 手机 (<768px)  
+            - __sm__ : 小屏幕 平板 (≥768px) 
+            - __md__ : 中等屏幕 桌面显示器 (≥992px) 
+            - __lg__ : 大屏幕 大桌面显示器 (≥1200px)
+
+            ```html
+            <div class="row">
+            <div class="col-md-2 text-center"></div>
+            <div class="col-md-5 text-center"></div>
+            <div class="col-md-2 text-center"></div>
+            <div class="col-md-3 text-center"></div>
+            </div>
+            ```
+
+
+
+
+        3.5 Bootstrap中轮播图插件叫作Carousel
+
+            ```html
+            <!-- 
+            以下容器就是整个轮播图组件的整体，
+            注意该盒子必须加上 class="carousel slide" data-ride="carousel" 表示当前是一个轮播图
+            bootstrap.js会自动为当前元 素添加图片轮播的特效
+            -->
+            <div id="轮播图的ID" class="carousel slide" data-ride="carousel">
+            <!-- ol标签是图片轮播的控制点 -->
+            <ol class="carousel-indicators">
+                <!-- 
+                每一个li就是一个单独的控制点
+                    data-target属性就是指定当前控制点控制的是哪一个轮播图，其目的是如果界面上有多个轮播图，便于区分到底控制哪一个
+                    data-slide-to属性是指当前的li元素绑定的是第几个轮播项
+                注意，默认必须给其中某个li加上active，展示的时候就是焦点项目
+                -->
+                <li data-target="#轮播图的ID" data-slide-to="0" class="active"></li>
+                <li data-target="#轮播图的ID" data-slide-to="1"></li>
+                <!-- ...更多的 -->
+            </ol>
+            <!-- 
+                .carousel-inner是所有轮播项的容器盒子，
+                注意role="listbox"代表当前div是一个列表盒子，作用就是给当前div添加一个语义
+            -->
+            <div class="carousel-inner" role="listbox">
+                <!-- 每一个.item就是单个轮播项目，注意默认要给第一个轮播项目加上active，表示为焦点 -->
+                <div class="item active">
+                <!-- 轮播项目中展示的图片 -->
+                <img src="example.jpg" alt="示例图片">
+                <div class="carousel-caption">
+                    <!-- 标题或说明性文字，如果不需要，直接删除当前div.carousel-caption -->
+                </div>
+                </div>
+                <div class="item">
+                <!-- ... -->
+                </div>
+                <!-- ... -->
+            </div>
+            <!-- 图片轮播上左右两个控制按钮，分别点击可以滚动到上一张和下一张 -->
+            <!-- 此处需要注意的是 该a链接的href属性必须指向需要控制的轮播图ID -->
+            <!-- 另外a链接中的data-slide="prev"代表点击该链接会滚到上一张，如果设置为next的话则相反 -->
+            <a class="left carousel-control" href="#轮播图的ID" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">上一张</span>
+            </a>
+            <a class="right carousel-control" href="#轮播图的ID" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">下一张</span>
+            </a>
+            </div>
+            ```
+
+ 
+
+
+
+
+
+
+
+
+
+
 ## node
     Front-End-Study/node/README.md
 ## 正则表达式

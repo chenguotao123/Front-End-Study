@@ -16,12 +16,12 @@
     npm docs 包名 查看包的文档
 
     语义化版本号
-    1.2.3
-    1表示重大更新
-    2表示向下兼容
-    3表示补丁包更新
+        1.2.3
+        1表示重大更新
+        2表示向下兼容
+        3表示补丁包更新
     
-    + dependencies 
+    dependencies 
     -  包名：“版本号” 
     -  > +版本号   下载大于某个版本号，npm会下最新版
     -  < +版本号   下载小于某个版本号，npm会下小于这个版本号最新版
@@ -30,7 +30,16 @@
     -   *、" "、X  任意 npm会给你下最新版
     -   ^ +版本号  不跃迁版本下载，^2.1.0 npm会下载大版本不变，去下载2.x.x版本里的最近版
     -   ~ +版本号  会去下约等于这个版本的最新版，在大版本不变的情况下下一个比较新的版本
-    
+
+    npm 启动 node 
+    "scripts": {
+    "start": "node ./bin/www",
+    "test": "node ./bin/test",
+    "qm":"node ./bin/test"
+    },
+    默认 npm start
+    可以占用npm 中的命令 npm test
+    可以自定义 npm run qm 
 ## windows 安装node 推荐使用nvm-windows
     详情参考  https://github.com/coreybutler/nvm-windows
 ## node ？
