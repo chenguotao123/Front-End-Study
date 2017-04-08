@@ -1,6 +1,5 @@
 # node-study
-    node 基本语法
-
+    node base use
 ##  安装注意问题
     node 安装完成后
     由于网络问题导致下载包会出问题，安装nrm来选择资源

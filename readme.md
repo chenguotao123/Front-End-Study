@@ -312,7 +312,8 @@
         rem：的基准值  16px  默认的字体大小是16px
         r 是root  根元素的意思  html文档的根元素是  html标签
         基准值是相对于来根元素（html）来的
-        
+## less sass
+    Front-End-Study/note/less-base.less
 ## js 
     1. ECMA+Dom+Bom  
         1. undefined,NaN，Null,infinity
@@ -1100,6 +1101,8 @@
 
 ## node
     Front-End-Study/node/README.md
+## 微信开发
+    待续
 ## 正则表达式
     Front-End-Study/note/reg.md
 ## 常用的设计模式
@@ -1170,5 +1173,15 @@
 
     5. ie注释语句
         cc:ie6
+    6. eslint
+        是nodejs编写，提供一种代码编写规范。
+        1. 对代码静态分析，不用执行就可以查找不符合语法规则的代码。
+        2. 可以自定义代码编写的规则
+
+        先全局或者本地安装
+        npm i -g eslint
+        vscode 中 安装eslint 插件
+        配置：Front-End-Study/note/eslint.md
+        参考 http://eslint.org/
 ## 常见的面试题
     Front-End-Study/面试
